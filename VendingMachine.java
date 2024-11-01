@@ -7,10 +7,13 @@ public class VendingMachine {
 
         ArrayList<Minuman> dataMinuman = new ArrayList<>();
         dataMinuman.add(new Minuman("Sprite", 4000, 10));
+
         Boolean condition = true;
+
+        Scanner scanner = new Scanner(System.in);
+
         while (condition) {
             try {
-                Scanner scanner = new Scanner(System.in);
                 System.out.println("========== SIlahkan Pilih Opsi ==========");
                 System.out.println("1. Order Minuman");
                 System.out.println("2. Maintanance Menu");
@@ -27,13 +30,15 @@ public class VendingMachine {
                     }
 
                     System.out.println("============================================");
+
                     int opsiMinuman = scanner.nextInt();
+
                     if (dataMinuman.get(opsiMinuman - 1).stok > 0) {
                         Minuman minumanDipilih = dataMinuman.get(opsiMinuman - 1);
                         System.out.println("========== Minuman Telah Dipilih ==========");
-                        System.out.println("Anda Memilih Minuman " + minumanDipilih.nama);
+                        System.out.println("Anda Memilih Minuman " + dataMinuman.get(opsiMinuman - 1).nama);
                         System.out.println("===========================================");
-                        minumanDipilih.stok--;
+                        dataMinuman.get(opsiMinuman - 1).stok--;
                     } else {
                         System.out.println("========== !!!!!!!! ==========");
                         System.out.println("Stok Minuman " + dataMinuman.get(opsiMinuman - 1).nama + " Telah Habis");
@@ -45,15 +50,22 @@ public class VendingMachine {
                     System.out.println("2. Hapus Minuman");
                     System.out.println("3. Ubah Minuman");
                     System.out.println("=========================================");
+
                     int opsiCRUD = scanner.nextInt();
+
                     if (opsiCRUD == 1) {
                         scanner.nextLine();
+
                         System.out.print("Silahkan Masukkan Nama Minuman : ");
+
                         String namaMinumanBaru = scanner.nextLine();
+
                         System.out.println();
+
                         Integer hargaMinumanBaru = null;
                         Integer stokMinumanBaru = null;
-                        boolean conditionHarga = true;
+                                            boolean conditionHarga = true;
+
                         while (conditionHarga) {
 
                             try {
@@ -96,8 +108,11 @@ public class VendingMachine {
                         boolean cNoMinuman = true;
                         while (cNoMinuman) {
                             try {
+
                                 int noHapus = scanner.nextInt();
+
                                 dataMinuman.remove(noHapus - 1);
+
                                 cNoMinuman = false;
                             } catch (Exception e) {
                                 System.out.println("Format Salah ( contoh: 1 )");
@@ -115,8 +130,11 @@ public class VendingMachine {
 
                         System.out.println("============================================");
                         Integer noMinuman = null;
+
                         try {
+
                             noMinuman = scanner.nextInt();
+
                         } catch (Exception e) {
                             System.out.println("Anda Salah Format");
                         }
@@ -129,41 +147,58 @@ public class VendingMachine {
                         System.out.println("===========================================");
                         Integer noContent = null;
                         try {
+
                             noContent = scanner.nextInt();
+
                         } catch (Exception e) {
                             System.out.println("Anda Salah Format");
                         }
                         if (noContent == 1) {
                             scanner.nextLine();
                             System.out.println("Masukkan Nama Baru : ");
+
                             String namaBaru = scanner.nextLine();
+
                             dataMinuman.get(noMinuman - 1).nama = namaBaru;
+                            
                             System.out.println();
                         } else if (noContent == 2) {
                             System.out.println("Masukkan Harga Baru : ");
+
                             int hargaBaru = scanner.nextInt();
                             dataMinuman.get(noMinuman - 1).harga = hargaBaru;
+
                             System.out.println();
                         } else if (noContent == 3) {
                             System.out.println("Masukkan Stok Baru : ");
+
                             int stokBaru = scanner.nextInt();
                             dataMinuman.get(noMinuman - 1).stok = stokBaru;
+
                             System.out.println();
                         } else if (noContent == 4) {
                             boolean kondisiUbah = true;
                             while (kondisiUbah) {
                                 try {
                                     scanner.nextLine();
+
                                     System.out.println("Masukkan Nama Baru : ");
                                     String namaBaru = scanner.nextLine();
+
                                     System.out.println();
+
                                     System.out.println("Masukkan Harga Baru : ");
                                     int hargaBaru = scanner.nextInt();
+
                                     System.out.println();
+
                                     System.out.println("Masukkan Stok Baru : ");
                                     int stokBaru = scanner.nextInt();
+
                                     System.out.println();
+
                                     dataMinuman.set(noMinuman - 1, new Minuman(namaBaru, hargaBaru, stokBaru));
+                                    
                                     kondisiUbah = false;
                                 } catch (Exception e) {
                                     System.out.println("Ada Kesalahan Format, Ulangi Masukkan Data");
@@ -182,9 +217,10 @@ public class VendingMachine {
                 } else {
                     condition = false;
                 }
-                scanner.close();
+
             } catch (Exception e) {
                 System.out.println("Ada Kesalahan, Ulangi!!");
+                break;
             }
         }
 
